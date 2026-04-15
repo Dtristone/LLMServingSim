@@ -95,7 +95,8 @@ if [[ -n "${HASH_TRACE}" ]]; then
     echo "============================================================"
     echo "  Step 1: Converting hash trace -> LLMServingSim dataset"
     echo "============================================================"
-    CONVERTED="${REPO_ROOT}/dataset/glm5_hash_trace_converted.jsonl"
+    TRACE_BASENAME="$(basename "${HASH_TRACE}" .jsonl)"
+    CONVERTED="${REPO_ROOT}/dataset/${TRACE_BASENAME}_converted.jsonl"
 
     CONVERT_ARGS=(
         --input "${HASH_TRACE}"

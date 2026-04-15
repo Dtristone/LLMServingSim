@@ -123,7 +123,12 @@ def convert_trace(input_path, output_path, output_tokens, timestamp_unit,
                     next_id += 1
                 token_ids.append(hash_to_id[h_key])
 
-            arrival_ns = int(float(timestamp) * multiplier)
+            try:
+                arrival_ns = int(float(timestamp) * multiplier)
+            except (TypeError, ValueError):
+                print(f"WARNING: Skipping line {line_no}: invalid timestamp "
+                      f"value {timestamp!r}", file=sys.stderr)
+                continue
 
             record = {
                 "input_toks": len(token_ids),

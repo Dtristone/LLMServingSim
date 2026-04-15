@@ -140,7 +140,9 @@ def main():
     print("=" * 70)
 
     if args.output_json:
-        os.makedirs(os.path.dirname(args.output_json) or ".", exist_ok=True)
+        out_dir = os.path.dirname(args.output_json)
+        if out_dir:
+            os.makedirs(out_dir, exist_ok=True)
         with open(args.output_json, "w", encoding="utf-8") as f:
             json.dump(all_results, f, indent=2)
         print(f"\nJSON results written to: {args.output_json}")
